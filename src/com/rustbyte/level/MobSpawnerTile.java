@@ -26,7 +26,8 @@ public class MobSpawnerTile extends Tile {
 		this.spawnType = type;
 		
 		switch(this.spawnType) {
-		case MOB_SPAWN_TYPE_HUMAN: mobName = "HUMAN"; break;
+		//TODO 
+		case MOB_SPAWN_TYPE_HUMAN: mobName = "HUMAN"; break; // MobSpawner spawner = HumanSpawner.getInstance;
 		case MOB_SPAWN_TYPE_ZOMBIE: mobName = "ZOMBIE"; break;
 		case MOB_SPAWN_TYPE_SKELETON: mobName = "SKELETON"; break;
 		}
@@ -35,7 +36,8 @@ public class MobSpawnerTile extends Tile {
 	private void spawnMob() {
 		
 		if( nextMobTimer <= 0 && numMobsSpawned < maxMobs) {
-			level.game.addEntity( Mob.createMob(mobName, (tx * 20) + 10, (ty * 20) + 10,20,20,null, level.game));
+			//TODO:
+			level.game.addEntity( Mob.createMob(mobName, (tx * 20) + 10, (ty * 20) + 10,20,20,null, level.game)); // spawner.spawnMob();
 			nextMobTimer = 60;
 			numMobsSpawned++;
 		}

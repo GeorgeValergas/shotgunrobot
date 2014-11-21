@@ -1,6 +1,6 @@
 package com.rustbyte;
 
-public class BulletTrace extends Entity {
+public class BulletTrace extends Entity implements Moveable {
 	
 	private double xl;
 	private double xs;
