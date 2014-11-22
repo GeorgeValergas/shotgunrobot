@@ -1,8 +1,13 @@
 package com.rustbyte.level;
 
 import java.util.Random;
+
+import com.rustbyte.HumanMobFactory;
 import com.rustbyte.Mob;
+import com.rustbyte.MobFactory;
 import com.rustbyte.Player;
+import com.rustbyte.SkeletonMobFactory;
+import com.rustbyte.ZombieMobFactory;
 import com.rustbyte.vector.Vector2;
 
 public class MobSpawnerTile extends Tile {
@@ -16,7 +21,7 @@ public class MobSpawnerTile extends Tile {
 	private int maxMobs = 10;
 	private int numMobsSpawned = 0;
 	private int spawnType = 0;
-	private String mobName;
+	private MobFactory mobFactory;
 	
 	public MobSpawnerTile(int type, int x, int y, int wid, int hgt, Level lev) {
 		super(x, y, wid, hgt, lev);
@@ -26,10 +31,15 @@ public class MobSpawnerTile extends Tile {
 		this.spawnType = type;
 		
 		switch(this.spawnType) {
-		//TODO 
-		case MOB_SPAWN_TYPE_HUMAN: mobName = "HUMAN"; break; // MobSpawner spawner = HumanSpawner.getInstance;
-		case MOB_SPAWN_TYPE_ZOMBIE: mobName = "ZOMBIE"; break;
-		case MOB_SPAWN_TYPE_SKELETON: mobName = "SKELETON"; break;
+		case MOB_SPAWN_TYPE_HUMAN: 
+			mobFactory = HumanMobFactory.getInstance();
+			break;
+		case MOB_SPAWN_TYPE_ZOMBIE: 
+			mobFactory = ZombieMobFactory.getInstance();
+			break;
+		case MOB_SPAWN_TYPE_SKELETON: 
+			mobFactory = SkeletonMobFactory.getInstance();
+			break;
 		}
 	}
 	
@@ -37,7 +47,7 @@ public class MobSpawnerTile extends Tile {
 		
 		if( nextMobTimer <= 0 && numMobsSpawned < maxMobs) {
 			//TODO:
-			level.game.addEntity( Mob.createMob(mobName, (tx * 20) + 10, (ty * 20) + 10,20,20,null, level.game)); // spawner.spawnMob();
+			level.game.addEntity(mobFactory.spawnMob((tx * 20) + 10, (ty * 20) + 10,20,20,null, level.game)); 
 			nextMobTimer = 60;
 			numMobsSpawned++;
 		}
@@ -52,7 +62,7 @@ public class MobSpawnerTile extends Tile {
 			rand.setSeed(level.game.tickcount);
 			
 			for(int i = 0; i < 5 + rand.nextInt(5); i++) {
-				level.game.addEntity(Mob.createMob(mobName, tx * 20, ty * 20,20,20,null, level.game));
+				level.game.addEntity(mobFactory.spawnMob(tx * 20, ty * 20,20,20,null, level.game));
 			}			
 		}		
 				
