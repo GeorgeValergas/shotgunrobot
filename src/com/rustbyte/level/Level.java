@@ -1,15 +1,9 @@
 package com.rustbyte.level;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Stack;
-
-import com.rustbyte.level.Tile;
-import com.rustbyte.vector.Vector2;
-import com.rustbyte.Game;
 import com.rustbyte.Bitmap;
 import com.rustbyte.Entity;
-import com.rustbyte.Human;
+import com.rustbyte.Game;
+import com.rustbyte.Player;
 
 public class Level {	
 	public int width;
@@ -53,6 +47,9 @@ public class Level {
 			map[i].init();			
 	}
 	
+	public Player getPlayer() {
+		return this.game.getPlayer();
+	}
 	public void setPlayerSpawn(Tile t) {
 		lastUnlockedSpawnLocation = t;
 	}
